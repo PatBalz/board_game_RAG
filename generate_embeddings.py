@@ -15,12 +15,23 @@ pprint.pp(docs[0])
 
 
 
+text_splitter = RecursiveCharacterTextSplitter(
+    chunk_size=1000, chunk_overlap=200, add_start_index=True
+)
+all_splits = text_splitter.split_documents(docs)
+
+print(len(all_splits))
+
+from langchain_ollama import OllamaEmbeddings
+
+embeddings = OllamaEmbeddings(model="llama3")
 
 
 
+from langchain_chroma import Chroma
 
-text_splitter = RecursiveCharacterTextSplitter(chunk_size=500,
-    chunk_overlap=100,
-    length_function=len,
-    is_separator_regex=False,)
-texts = text_splitter.split_text(docs)
+vector_store = Chroma(
+    collection_name="board_game_rules",
+    embedding_function=embeddings,
+    persist_directory="./chromaDB", 
+)

@@ -1,2 +1,5 @@
+chromaDB/
 board_game_rules/
 .venv/
+documentation_intern.odt
+.~lock*
