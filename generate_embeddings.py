@@ -1,14 +1,8 @@
 import os
 from langchain_community.document_loaders import PyPDFLoader
-import sys
-
-#current_dir = os.getcwd()
-#src_folder = os.path.join(current_dir, "src")
-#print(sys.path)
-#print(src_folder.)
-
-from knowledge_base import load_vector_db, compare_splits_to_DB_content
-from splitting import split_langchain_document, get_split_ids
+from src.knowledge_base import load_vector_db, compare_splits_to_DB_content
+from src.splitting_documents import split_langchain_document, get_split_ids
+from tqdm import tqdm
 
 #PATH to Knowledge-Base
 pdf_document_DIR = os.path.join(os.getcwd(),'board_game_rules')
@@ -31,12 +25,12 @@ for pdf_file in os.listdir(pdf_document_DIR):
     
     new_splits, split_ids_for_vectorDB = compare_splits_to_DB_content(splits_with_ids, vector_db) 
         
-    for split_idx in range(len(new_splits)):
-        print(str(split_idx) + " of " + str(len(new_splits)))
+    for split_idx in tqdm(range(len(new_splits))):
+        #print(str(split_idx) + " of " + str(len(new_splits)))
         vector_db.add_documents([new_splits[split_idx]], 
                                 ids = [split_ids_for_vectorDB[split_idx]])
-        print("added to DB")
-        print("#####")
+        #print("added to DB")
+        #print("#####")
     
 #man über gibt die splits-Objecte von "split_documents" direct an die chroma_instance -> embeddings werden dann on the fly erzeugt
 

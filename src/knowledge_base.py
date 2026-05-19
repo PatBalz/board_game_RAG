@@ -11,7 +11,7 @@ def get_embedding_function():
 
 def load_vector_db():
     vector_db = Chroma(
-        collection_name="board_game_rules_nomic-embed-text",
+        collection_name="board_game_rules_nomic-embed-text_len750_overlap350",
         embedding_function=get_embedding_function(),
         persist_directory="./chromaDB", 
     )
