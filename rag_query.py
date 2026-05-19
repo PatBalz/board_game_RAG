@@ -17,11 +17,16 @@ Further below you will find chunks of information directly drawn from the rule b
 This is our question: {question}
 Please answer the given question based on these following context fragments from the rule book below:
 {context}
-Remember to stick to the context above to answer the question!
+Remember to stick to the context above to answer the question! Butkeep in mind that maybe not all fragments 
+are helpful to answer the question so do the following:
+1. try to order the fragments by importance based on their helpfulness to answer the question
+2. try to answer the question based on the most helpful fragments
+
+Please keep your answer as concicse as possible!
 """
 
 
-question = """what happens when I send an Agent to Heighliner board space?"""
+question = """what happens when I send an Agent to Conspire board space and what do I gain?"""
 #"how many victory points does one player need to reach in order to win the game?"
 
 
