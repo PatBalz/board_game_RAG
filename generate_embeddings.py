@@ -37,7 +37,7 @@ def get_split_ids(splits):
 pdf_document_DIR = os.path.join(os.getcwd(),'board_game_rules')
 
 #get one file
-for pdf_file in os.listdir(pdf_document_DIR)[0:1]:
+for pdf_file in os.listdir(pdf_document_DIR):
     print("current-file: ", pdf_file)
     file_path = os.path.join(pdf_document_DIR, pdf_file)
     loader = PyPDFLoader(file_path)
@@ -82,7 +82,7 @@ for pdf_file in os.listdir(pdf_document_DIR)[0:1]:
                                 ids = [split_ids_for_vectorDB[split_idx]])
         print("added to DB")
         print("#####")
-    vector_db.persist()
+    #vector_db.persist()
 #man über gibt die splits-Objecte von "split_documents" direct an die chroma_instance -> embeddings werden dann on the fly erzeugt
 
 
