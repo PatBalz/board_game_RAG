@@ -7,24 +7,26 @@ vector_db = load_vector_db()
 embedding_function = get_embedding_function()
 
 PROMPT_TEMPLATE = """
-You are an instructor for people who participate in a game night. 
-They play the board game dune imperium and potentially some addons to it.
+Setting: 
+You are an instructor for people who participate in a game night.
+These peolple are a group of frieds which enjoy complex board games. 
 Players may have questions on certain rules or cards, because the rulebook of this game is very
 extensive and hard to understand. You are there last hope to really understand the game rules.
 Please treat any question as a completely new interaction without remembering what was done before.
-Please answer the given question in english based on the context below:
+Further below you will find chunks of information directly drawn from the rule book.
+Please answer the given question in english based on only this context below:
 {context}
 Here is the question:
 {question}
 Remember to stick to the context above to answer the question!
-Please be honest if you are not confident in your answer.
 """
 
 
-question = "one player hase reached 10 victory points, what to do now?"
+question = """how many intrigue cards are part of the game"""
+#"how many victory points does one player need to reach in order to win the game?"
 
 
-search_results = vector_db.similarity_search_with_score(question, k = 20)
+search_results = vector_db.similarity_search_with_score(question, k = 5)
 
 
 for res in search_results:
@@ -33,14 +35,14 @@ for res in search_results:
     #print(res[0].page_content.split("\\n"))
     #print("\n ------ \n")
  
-context_text = "\n --- \n".join(["Source: "+res[0].metadata.get("source")+"\n Content: "+res[0].page_content for res in search_results])
+context_text = "\n --- \n".join(["Source: "+res[0].metadata.get("id")+"\n Content: "+res[0].page_content for res in search_results])
 print(context_text)
 prompt_template = ChatPromptTemplate.from_template(PROMPT_TEMPLATE)
 prompt = prompt_template.format(context=context_text, question=question)
 
 model = OllamaLLM(
     model="llama3.2:1b",
-    temperature=0.5,
+    temperature=0.6,
     #num_ctx=500,
     #num_predict=4000
     # base_url="http://localhost:11434",

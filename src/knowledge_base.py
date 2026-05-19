@@ -1,18 +1,14 @@
-import os
-from langchain_community.document_loaders import PyPDFLoader
-from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_ollama import OllamaEmbeddings
 from langchain_chroma import Chroma
-from langchain_community.embeddings.bedrock import BedrockEmbeddings
 
 
 def get_embedding_function():
-    embedding_function = OllamaEmbeddings(model="llama3.2:1b")#"nomic-embed-text")
+    embedding_function = OllamaEmbeddings(model="mxbai-embed-large")#"nomic-embed-text")
     return embedding_function
 
 def load_vector_db():
     vector_db = Chroma(
-        collection_name="board_game_rules_nomic-embed-text_len1200_overlap400",
+        collection_name="board_game_rules_mxbai-embed-large",
         embedding_function=get_embedding_function(),
         persist_directory="./chromaDB", 
     )
