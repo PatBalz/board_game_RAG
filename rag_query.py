@@ -14,15 +14,14 @@ Players may have questions on certain rules or cards, because the rulebook of th
 extensive and hard to understand. You are there last hope to really understand the game rules.
 Please treat any question as a completely new interaction without remembering what was done before.
 Further below you will find chunks of information directly drawn from the rule book.
-Please answer the given question in english based on only this context below:
+This is our question: {question}
+Please answer the given question based on these following context fragments from the rule book below:
 {context}
-Here is the question:
-{question}
 Remember to stick to the context above to answer the question!
 """
 
 
-question = """how many intrigue cards are part of the game"""
+question = """what happens when I send an Agent to Heighliner board space?"""
 #"how many victory points does one player need to reach in order to win the game?"
 
 
@@ -35,7 +34,7 @@ for res in search_results:
     #print(res[0].page_content.split("\\n"))
     #print("\n ------ \n")
  
-context_text = "\n --- \n".join(["Source: "+res[0].metadata.get("id")+"\n Content: "+res[0].page_content for res in search_results])
+context_text = "\n --- \n".join(["\n Source: "+res[0].metadata.get("id")+"\n Content from Rulebook: [START OF CONTENT FRAGMENT] \n"+res[0].page_content+" [END OF CONTENT FRAGMENT]\n" for res in search_results])
 print(context_text)
 prompt_template = ChatPromptTemplate.from_template(PROMPT_TEMPLATE)
 prompt = prompt_template.format(context=context_text, question=question)
