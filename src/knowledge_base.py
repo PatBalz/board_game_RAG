@@ -7,7 +7,7 @@ from langchain_community.embeddings.bedrock import BedrockEmbeddings
 
 
 def get_embedding_function():
-    embedding_function = OllamaEmbeddings(model="nomic-embed-text")
+    embedding_function = OllamaEmbeddings(model="llama3.2:1b")#"nomic-embed-text")
     return embedding_function
 
 def load_vector_db():
