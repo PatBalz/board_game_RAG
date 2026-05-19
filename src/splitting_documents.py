@@ -2,10 +2,10 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 def split_langchain_document(docs):
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=750, 
-        chunk_overlap=350, 
-        add_start_index=True,
-        length_function=len
+        chunk_size=1200, 
+        chunk_overlap=400, 
+        #add_start_index=True,
+        #length_function=len
     )
     splits = text_splitter.split_documents(docs)
     return splits

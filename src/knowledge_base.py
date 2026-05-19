@@ -3,6 +3,7 @@ from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_ollama import OllamaEmbeddings
 from langchain_chroma import Chroma
+from langchain_community.embeddings.bedrock import BedrockEmbeddings
 
 
 def get_embedding_function():
@@ -11,7 +12,7 @@ def get_embedding_function():
 
 def load_vector_db():
     vector_db = Chroma(
-        collection_name="board_game_rules_nomic-embed-text_len750_overlap350",
+        collection_name="board_game_rules_nomic-embed-text_len1200_overlap400",
         embedding_function=get_embedding_function(),
         persist_directory="./chromaDB", 
     )
