@@ -14,7 +14,7 @@ The key goal is that the system can run **fully locally on a CPU-only machine** 
 - Answers with **citations to retrieved rule text** (recommended/implemented depending on configuration)
 
 ## Repository layout
-- `src/` – RAG pipeline code (ingest/index/retrieve/generate)
+- `src/` – source files
 - `config/` – configuration
 
 ## Notes / Design goals
