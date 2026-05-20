@@ -3,7 +3,7 @@ from langchain_chroma import Chroma
 
 
 def get_embedding_function():
-    embedding_function = OllamaEmbeddings(model="mxbai-embed-large")#"nomic-embed-text")
+    embedding_function = OllamaEmbeddings(model="mxbai-embed-large")#"mxbai-embed-large"#"nomic-embed-text"
     return embedding_function
 
 def load_vector_db():

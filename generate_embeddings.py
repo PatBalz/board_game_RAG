@@ -2,19 +2,24 @@ import os
 from langchain_community.document_loaders import PyPDFLoader
 from src.knowledge_base import load_vector_db, compare_splits_to_DB_content
 from src.splitting_documents import split_langchain_document, get_split_ids
+from src.misc import load_config
 from tqdm import tqdm
 
-#PATH to Knowledge-Base
-pdf_document_DIR = os.path.join(os.getcwd(),'board_game_rules')
+#Configuration settings
+BASE_PATH = os.getcwd()
+CONFIG_PATH = os.path.join(BASE_PATH, "config\config.yml")
+config = load_config(CONFIG_PATH)
+KNOWLEDGE_PATH = os.path.join(BASE_PATH, config["knowledge_folder"])
+SPLIT_TYPE = config["split_type"]
 
 #Create chunks and embeddinges for each document
-for pdf_file in os.listdir(pdf_document_DIR):
+for pdf_file in os.listdir(KNOWLEDGE_PATH):
     print("current-file: ", pdf_file)
-    file_path = os.path.join(pdf_document_DIR, pdf_file)
+    file_path = os.path.join(KNOWLEDGE_PATH, pdf_file)
     loader = PyPDFLoader(file_path)
     docs = loader.load() #genertes a list of langchain-documents per pdf-page
 
-    all_splits = split_langchain_document(docs)
+    all_splits = split_langchain_document(docs, SPLIT_TYPE)
     print(len(all_splits))
     #bevor man die items zur DB hinzufügt müssen noch eindeitige IDs erzeugt werden
     splits_with_ids = get_split_ids(all_splits)

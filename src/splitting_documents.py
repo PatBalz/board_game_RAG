@@ -1,12 +1,26 @@
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+from semantic_chunker_langchain.chunker import SemanticChunker, SimpleSemanticChunker
 
-def split_langchain_document(docs):
-    text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=1024, 
-        chunk_overlap=512, 
-        length_function=len,
-    )
-    splits = text_splitter.split_documents(docs)
+def split_langchain_document(docs, split_type="recursive"):
+    if split_type == "recursive":
+        text_splitter = RecursiveCharacterTextSplitter(
+            chunk_size=512, 
+            chunk_overlap=128, 
+            length_function=len,
+            separators=["\n\n", "\n", " ", "  ", ".", ",", "\t"]
+        )
+        splits = text_splitter.split_documents(docs)   
+
+    elif split_type == "semantic":
+        text_splitter = SemanticChunker(model_name="gpt-3.5-turbo")
+        pre_splits = text_splitter.split_documents(docs)
+        
+        text_splitter = RecursiveCharacterTextSplitter(
+            chunk_size=100, 
+            chunk_overlap=20, 
+            length_function=len,
+        )
+        splits = text_splitter.split_documents(pre_splits)
     return splits
 
 def get_split_ids(splits):
