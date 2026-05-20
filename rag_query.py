@@ -16,7 +16,7 @@ embedding_function = get_embedding_function()
 
 PROMPT_TEMPLATE = load_prompt_template(PROMPT_TEMPLATE_PATH)
 
-question = "how many intrigue cards are part of the game?"#"what do I do during an agent turn?"#"on which board spaces can I gain spice?"#"how to gain victory points?"#"what can I do with a combat intrigue card?"#"what are the different types of intrigue cards?"#"what are intrigue cards, what can I do with them?"#"when does the endgame start?"#"""what happens when I send an Agent to Conspire board space and what do I gain?"""#"how do I get the Mentat"
+question = "What can be done with an intrigue card?"#"how do I get the Mentat"#"How many victory points are needed to win the game?"#"what do I do during an agent turn?"#"on which board spaces can I gain spice?"#"how to gain victory points?"#"what can I do with a combat intrigue card?"#"what are the different types of intrigue cards?"#"what are intrigue cards, what can I do with them?"#"when does the endgame start?"#"""what happens when I send an Agent to Conspire board space and what do I gain?"""#"how do I get the Mentat"
 #"how many victory points does one player need to reach in order to win the game?"
 #"how do I get the Mentat"# "on which board spaces can I gain spice?"
  
