@@ -28,6 +28,7 @@ def get_split_ids(splits):
     split_idx = 0
     for split in splits:
         source_file = split.metadata.get("source")
+        source_file = source_file.split('\\')[-1]
         page_number = split.metadata.get("page")
         if page_number == last_page_number:
             split_idx = split_idx + 1
