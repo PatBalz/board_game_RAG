@@ -29,3 +29,17 @@ def compare_splits_to_DB_content(splits_with_ids, vector_db):
         ]
     print("Number of items to add: "+str(len(new_splits)))
     return new_splits, split_ids_for_vectorDB
+
+def perform_vector_search(vector_db, question):
+    search_results = vector_db.similarity_search_with_score(question, k = 5)
+
+    for res in search_results:
+        print("Result, Distance =  "+str(res[1]))
+        print(res[0].metadata.get("source"))
+    
+    context_text = "\n --- \n".join(["\n Source: "+res[0].metadata.get("id")+
+                                    "\n Content from Rulebook: [START OF CONTENT FRAGMENT] \n"+
+                                    res[0].page_content+
+                                    " [END OF CONTENT FRAGMENT]\n" for res in search_results if res[1]<=10])
+    
+    return context_text

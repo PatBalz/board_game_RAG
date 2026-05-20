@@ -4,10 +4,10 @@ from semantic_chunker_langchain.chunker import SemanticChunker, SimpleSemanticCh
 def split_langchain_document(docs, split_type="recursive"):
     if split_type == "recursive":
         text_splitter = RecursiveCharacterTextSplitter(
-            chunk_size=512, 
-            chunk_overlap=128, 
+            chunk_size=700, 
+            chunk_overlap=250, 
             length_function=len,
-            separators=["\n\n", "\n", " ", "  ", ".", ",", "\t"]
+            separators=["\n\n", "\n", " ", "  ", ".", "\t"]
         )
         splits = text_splitter.split_documents(docs)   
 
