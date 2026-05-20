@@ -13,20 +13,19 @@ The key goal is that the system can run **fully locally on a CPU-only machine** 
 - **Local indexing + retrieval** (runs offline after setup)
 - Answers with **citations to retrieved rule text** (recommended/implemented depending on configuration)
 
-## Repository layout (target-picture ;))
-- `data/` – source documents for Dune Imperium rules/text (your files)
+## Repository layout
 - `src/` – RAG pipeline code (ingest/index/retrieve/generate)
-- `config/` – model + pipeline configuration
-- `notebooks/` – experiments and evaluation helpers (optional)
+- `config/` – configuration
 
 ## Notes / Design goals
-- Retrieval quality matters: chunking, overlap, and metadata (page/section) will be tuned to find optimum
+- Retrieval quality matters: text splitting, overlap, EMBEDDING QUALITY, and metadata (page/section) will be tuned to find optimum
 - For best results, the generator should be instructed to:
   - use retrieved passages as the source of truth
   - acknowledge uncertainty when retrieval is insufficient
 
 ## Next steps (roadmap)
 - Improve chunking strategy for complex rules lookups
+- implement better embedding strategy
 - Implement lightweight evaluation (coverage of common rules queries)
 - Expand beyond text rules (e.g., glossary of terms, edge-case handling)
 - Maybe implement a reinforcement training via skilled users
