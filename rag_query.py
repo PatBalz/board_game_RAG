@@ -23,6 +23,13 @@ question = "What can be done with an intrigue card?"#"how do I get the Mentat"#"
 context_text = perform_vector_search(vector_db, question)
 print(context_text)
 
+
+#here we need some mechanism to re-rank the context or to test if the context is feasible at all
+
+
+
+
+
 prompt_template = ChatPromptTemplate.from_template(PROMPT_TEMPLATE)
 prompt = prompt_template.format(context=context_text, question=question)
 
